@@ -40,7 +40,7 @@ class QueryTest extends PHPUnit_Framework_TestCase
 
     public function testModifyWithQueryInterface()
     {
-        $this->query->modify(new Query(array('foo' => 'bar')));
+        $this->query->modify(new Query('foo=bar'));
         $this->assertSame('kingkong=toto&foo=bar', (string) $this->query);
     }
 
@@ -69,10 +69,12 @@ class QueryTest extends PHPUnit_Framework_TestCase
         $this->assertSame('', (string) $this->query);
     }
 
-    public function testSetterWithArray()
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetterWithArrayFailed()
     {
         $this->query->set(array('ali' => 'baba'));
-        $this->assertSame('ali=baba', (string) $this->query);
     }
 
     /**
@@ -107,7 +109,8 @@ class QueryTest extends PHPUnit_Framework_TestCase
 
     public function testKeys()
     {
-        $query = new Query(array('foo' => 'bar', 'baz' => 'troll', 'lol' => 3, 'toto' => 'troll'));
+        $query = new Query;
+        $query->modify(array('foo' => 'bar', 'baz' => 'troll', 'lol' => 3, 'toto' => 'troll'));
         $this->assertCount(0, $query->keys('foo'));
         $this->assertSame(array('foo'), $query->keys('bar'));
         $this->assertCount(0, $query->keys('3'));
@@ -123,7 +126,8 @@ class QueryTest extends PHPUnit_Framework_TestCase
 
     public function testDotFromArray()
     {
-        $query = new Query(array('foo.bar' => 'baz'));
+        $query = new Query;
+        $query->modify(array('foo.bar' => 'baz'));
         $this->assertSame('foo.bar=baz', (string) $query);
     }
 }

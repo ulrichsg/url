@@ -12,6 +12,7 @@
 */
 namespace League\Url\Components;
 
+use InvalidArgumentException;
 use RuntimeException;
 use Traversable;
 
@@ -31,6 +32,7 @@ class Query extends AbstractContainer implements Component
      */
     public function __construct($data = null)
     {
+
         $this->set($data);
     }
 
@@ -39,13 +41,17 @@ class Query extends AbstractContainer implements Component
      */
     public function set($data)
     {
-        $this->data = array_filter($this->validate($data), function ($value) {
-            if (is_string($value)) {
-                $value = trim($value);
-            }
+        if (is_null($data)) {
+            $this->data = array();
 
-            return null !== $value && '' !== $value;
-        });
+            return;
+        } elseif (is_string($data) || (is_object($data) && method_exists($data, '__toString'))) {
+            $this->data = $this->extractDataFromString((string) $data);
+
+            return;
+        }
+
+        throw new InvalidArgumentException('constructor expect an stringable argument');
     }
 
     /**
@@ -90,7 +96,15 @@ class Query extends AbstractContainer implements Component
      */
     public function modify($data)
     {
-        $this->set(array_merge($this->data, $this->validate($data)));
+        $data = array_merge($this->data, $this->validate($data));
+
+        $this->data = array_filter($data, function ($value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+
+            return null !== $value && '' !== $value;
+        });
     }
 
     protected function extractDataFromString($str)

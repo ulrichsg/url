@@ -23,7 +23,7 @@ interface Component
     /**
      * Set the component data
      *
-     * @param mixed $data data to be added
+     * @param string $data data to be added
      *
      * @return void
      */
@@ -49,5 +49,4 @@ interface Component
      * @return string
      */
     public function getUriComponent();
-
 }

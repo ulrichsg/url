@@ -87,26 +87,6 @@ abstract class AbstractSegment extends AbstractContainer
     }
 
     /**
-     * ArrayAccess Interface method
-     */
-    public function offsetSet($offset, $value)
-    {
-        $data = $this->data;
-        if (is_null($offset)) {
-            $data[] = $value;
-            $this->set($data);
-
-            return;
-        }
-        $offset = filter_var($offset, FILTER_VALIDATE_INT, array('min_range' => 0));
-        if (false === $offset) {
-            throw new InvalidArgumentException('Offset must be an integer');
-        }
-        $data[$offset] = $value;
-        $this->set($data);
-    }
-
-    /**
      * Validate a component
      *
      * @param mixed $data the component value to be validate
@@ -189,8 +169,16 @@ abstract class AbstractSegment extends AbstractContainer
         return $data;
     }
 
+    /**
+     * convert a string into an array
+     *
+     * @param mixed $str the value to be converted into an array
+     *
+     * @return array
+     */
     protected function extractDataFromString($str)
     {
+        $str = (string) $str;
         if ('' == $str) {
             return array();
         }

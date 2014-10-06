@@ -12,7 +12,6 @@
 */
 namespace League\Url\Components;
 
-use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
@@ -23,7 +22,7 @@ use IteratorAggregate;
  *  @package League.url
  *  @since  3.0.0
  */
-abstract class AbstractContainer implements IteratorAggregate, Countable, ArrayAccess
+abstract class AbstractContainer implements IteratorAggregate, Countable
 {
     /**
      * container holder
@@ -72,36 +71,6 @@ abstract class AbstractContainer implements IteratorAggregate, Countable, ArrayA
     {
         return count($this->data, $mode);
     }
-
-    /**
-     * ArrayAccess Interface method
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->data[$offset]);
-    }
-
-    /**
-     * ArrayAccess Interface method
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->data[$offset]);
-    }
-
-    /**
-     * ArrayAccess Interface method
-     */
-    public function offsetGet($offset)
-    {
-        if (isset($this->data[$offset])) {
-            return $this->data[$offset];
-        }
-
-        return null;
-    }
-
-    abstract public function offsetSet($offset, $value);
 
     public static function isStringable($data)
     {

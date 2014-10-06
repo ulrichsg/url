@@ -12,7 +12,7 @@
 */
 namespace League\Url\Components;
 
-use League\Url\Punycode;
+use League\Url\Components\Punycode\Punycode;
 use LogicException;
 use RuntimeException;
 
@@ -222,13 +222,6 @@ class Host extends AbstractSegment implements Component
         $this->assertHostAsIp();
 
         return parent::prepend($data, $whence, $whence_index);
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->assertHostAsIp();
-
-        return parent::offsetSet($offset, $value);
     }
 
     /**

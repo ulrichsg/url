@@ -160,6 +160,8 @@ abstract class AbstractSegment extends AbstractContainer
             $data = (string) $data;
             $data = trim($data);
             $data = $this->extractDataFromString($data);
+
+            return $data;
         }
 
         if (! is_array($data)) {

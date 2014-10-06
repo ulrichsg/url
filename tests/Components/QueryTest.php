@@ -101,6 +101,15 @@ class QueryTest extends PHPUnit_Framework_TestCase
         $query[] = 'comment ça va';
     }
 
+    public function testSetParameters()
+    {
+        $query = new Query;
+        $query->setParameter('toto', 'leheros');
+        $this->assertSame($query['toto'], $query->getParameter('toto'));
+        $expected = 'bar';
+        $this->assertSame($expected, $query->getParameter('voo', $expected));
+    }
+
     public function testCountableRecursive()
     {
         $query = new Query('rech[id_client]=&rech[login]=&rech[NOM]=&options[NOM][precise]=1&rech[PRENOM]=&options[PRENOM][precise]=1&rech[email]=&rech[foo]=12345&rech[ID_ACHAT]=');

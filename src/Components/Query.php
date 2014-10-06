@@ -12,6 +12,7 @@
 */
 namespace League\Url\Components;
 
+use ArrayAccess;
 use InvalidArgumentException;
 use RuntimeException;
 use Traversable;
@@ -22,7 +23,7 @@ use Traversable;
  *  @package League.url
  *  @since  1.0.0
  */
-class Query extends AbstractContainer implements Component
+class Query extends AbstractContainer implements Component, ArrayAccess
 {
     /**
      * The Constructor
@@ -41,17 +42,10 @@ class Query extends AbstractContainer implements Component
      */
     public function set($data)
     {
-        if (is_null($data)) {
-            $this->data = array();
-
-            return;
-        } elseif (is_string($data) || (is_object($data) && method_exists($data, '__toString'))) {
-            $this->data = $this->extractDataFromString((string) $data);
-
-            return;
+        if (! is_null($data) && ! static::isStringable($data)) {
+            throw new InvalidArgumentException('set expects an stringable argument');
         }
-
-        throw new InvalidArgumentException('constructor expect an stringable argument');
+        $this->data = $this->validate($this->extractDataFromString($data));
     }
 
     /**
@@ -92,6 +86,35 @@ class Query extends AbstractContainer implements Component
     }
 
     /**
+     * Return a Query Parameter
+     *
+     * @param string $key     the query parameter key
+     * @param mixed  $default the query parameter default value
+     *
+     * @return mixed
+     */
+    public function getParameter($key, $default = null)
+    {
+        $res = $this->offsetGet($key);
+        if (is_null($res)) {
+            return $default;
+        }
+
+        return $res;
+    }
+
+    /**
+     * Query Parameter Setter alias of offsetSet
+     *
+     * @param string $key   the query parameter key
+     * @param mixed  $value the query parameter value
+     */
+    public function setParameter($key, $value)
+    {
+        return $this->offsetSet($key, $value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function modify($data)
@@ -109,6 +132,7 @@ class Query extends AbstractContainer implements Component
 
     protected function extractDataFromString($str)
     {
+        $str = (string) $str;
         if ('' == $str) {
             return array();
         }
@@ -135,9 +159,7 @@ class Query extends AbstractContainer implements Component
      */
     protected function validate($data)
     {
-        if (is_null($data)) {
-            return array();
-        } elseif ($data instanceof Traversable) {
+        if ($data instanceof Traversable) {
             return iterator_to_array($data);
         } elseif (is_array($data)) {
             return $data;
@@ -147,6 +169,34 @@ class Query extends AbstractContainer implements Component
         $data = trim($data);
 
         return $this->extractDataFromString($data);
+    }
+
+    /**
+     * ArrayAccess Interface method
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]);
+    }
+
+    /**
+     * ArrayAccess Interface method
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->data[$offset]);
+    }
+
+    /**
+     * ArrayAccess Interface method
+     */
+    public function offsetGet($offset)
+    {
+        if (isset($this->data[$offset])) {
+            return $this->data[$offset];
+        }
+
+        return null;
     }
 
     /**

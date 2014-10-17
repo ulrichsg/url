@@ -33,6 +33,13 @@ abstract class AbstractContainer implements IteratorAggregate, Countable
     protected $data = array();
 
     /**
+     * String representation of an URL component
+     *
+     * @return string
+     */
+    abstract public function __toString();
+
+    /**
      * return a array representation of the data
      *
      * @return array

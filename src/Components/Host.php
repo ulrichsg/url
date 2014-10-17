@@ -13,6 +13,7 @@
 namespace League\Url\Components;
 
 use League\Url\Components\Punycode\Punycode;
+use League\Url\Interfaces\Host as HostInterface;
 use LogicException;
 use RuntimeException;
 
@@ -22,7 +23,7 @@ use RuntimeException;
  *  @package League.url
  *  @since  1.0.0
  */
-class Host extends AbstractSegment implements Component
+class Host extends AbstractSegment implements HostInterface
 {
     /**
      * {@inheritdoc}
@@ -232,14 +233,6 @@ class Host extends AbstractSegment implements Component
         $this->assertHostAsIp();
 
         return parent::remove($data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Host $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 
     /**

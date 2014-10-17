@@ -12,6 +12,8 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Component;
+
 /**
  *  A class to manipulate URL User component
  *
@@ -26,13 +28,5 @@ class User extends AbstractComponent implements Component
     public function getUriComponent()
     {
         return $this->__toString();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(User $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 }

@@ -20,6 +20,7 @@ use League\Url\Components\Port;
 use League\Url\Components\Query;
 use League\Url\Components\Scheme;
 use League\Url\Components\User;
+use League\Url\Interfaces\Url as UrlInterface;
 use RuntimeException;
 
 /**

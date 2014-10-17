@@ -10,7 +10,7 @@
 * For the full copyright and license information, please view the LICENSE
 * file that was distributed with this source code.
 */
-namespace League\Url;
+namespace League\Url\Interfaces;
 
 /**
  * A common interface for URL as Value Object
@@ -18,7 +18,7 @@ namespace League\Url;
  *  @package League.url
  *  @since  3.0.0
  */
-interface UrlInterface
+interface Url
 {
     /**
      * return the string representation for the current URL
@@ -60,7 +60,7 @@ interface UrlInterface
      *
      * @return string
      */
-    public function getUrl(UrlInterface $ref_url = null);
+    public function getUrl(Url $ref_url = null);
 
     /**
      * Compare two Url object and tells whether they can be considered equal
@@ -69,7 +69,7 @@ interface UrlInterface
      *
      * @return boolean
      */
-    public function sameValueAs(UrlInterface $url);
+    public function sameValueAs(Url $url);
 
     /**
      * Set the URL scheme component

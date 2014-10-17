@@ -15,6 +15,7 @@ namespace League\Url\Components;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use League\Url\Interfaces\Component;
 
 /**
  *  A class to manipulate URL Array like components
@@ -32,7 +33,9 @@ abstract class AbstractContainer implements IteratorAggregate, Countable
     protected $data = array();
 
     /**
-     * {@inheritdoc}
+     * return a array representation of the data
+     *
+     * @return array
      */
     public function toArray()
     {
@@ -40,7 +43,9 @@ abstract class AbstractContainer implements IteratorAggregate, Countable
     }
 
     /**
-     * {@inheritdoc}
+     * return the array keys
+     *
+     * @return array
      */
     public function keys()
     {
@@ -72,8 +77,23 @@ abstract class AbstractContainer implements IteratorAggregate, Countable
         return count($this->data, $mode);
     }
 
+    /**
+     * Tell whether the data can be converted into a string
+     *
+     * @param mixed $data
+     *
+     * @return boolean
+     */
     public static function isStringable($data)
     {
         return is_string($data) || (is_object($data)) && (method_exists($data, '__toString'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sameValueAs(Component $component)
+    {
+        return $this->__toString() === $component->__toString();
     }
 }

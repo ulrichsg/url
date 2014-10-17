@@ -12,6 +12,8 @@
 */
 namespace League\Url;
 
+use League\Url\Interfaces\Url as UrlInterface;
+
 /**
  * A class to manipulate URLs
  *

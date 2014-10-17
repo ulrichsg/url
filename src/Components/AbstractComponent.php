@@ -12,6 +12,8 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Component;
+
 /**
  *  A class to manipulate URL Pass component
  *
@@ -65,5 +67,13 @@ class AbstractComponent
     public function __toString()
     {
         return str_replace(null, '', $this->data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sameValueAs(Component $component)
+    {
+        return $this->__toString() === $component->__toString();
     }
 }

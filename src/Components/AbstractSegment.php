@@ -278,4 +278,34 @@ abstract class AbstractSegment extends AbstractContainer
 
         return substr($segment, 0, $pos).substr($segment, $pos + strlen($part) + 1);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSegment($key, $default = null)
+    {
+        $key = filter_var($key, FILTER_VALIDATE_INT, array('options' => array("min_range" => 0)));
+        if (false === $key || ! isset($this->data[$key])) {
+            return $default;
+        }
+
+        return $this->data[$key];
+    }
+
+    public function setSegment($key, $value)
+    {
+        $key = filter_var($key, FILTER_VALIDATE_INT, array(
+            'options' => array(
+                "min_range" => 0,
+                "max_range" => count($this->data)+1,
+            )
+        ));
+        if (false === $key) {
+            throw new InvalidArgumentException('key must be a positif interger or 0');
+        }
+
+        $this->data[$key] = (string) $value;
+
+        return $this;
+    }
 }

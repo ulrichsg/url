@@ -12,6 +12,7 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Component;
 use RuntimeException;
 
 /**
@@ -43,14 +44,6 @@ class Scheme extends AbstractComponent implements Component
         }
 
         $this->data = strtolower($data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Scheme $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 
     /**

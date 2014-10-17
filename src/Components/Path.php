@@ -12,13 +12,15 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Path as PathInterface;
+
 /**
  *  A class to manipulate URL Path component
  *
  *  @package League.url
  *  @since  1.0.0
  */
-class Path extends AbstractSegment implements Component
+class Path extends AbstractSegment implements PathInterface
 {
     /**
      * {@inheritdoc}
@@ -102,14 +104,6 @@ class Path extends AbstractSegment implements Component
     protected function formatRemoveSegment($data)
     {
         return array_map('urldecode', parent::formatRemoveSegment($data));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Path $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 
     /**

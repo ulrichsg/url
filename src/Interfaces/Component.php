@@ -10,7 +10,7 @@
 * For the full copyright and license information, please view the LICENSE
 * file that was distributed with this source code.
 */
-namespace League\Url\Components;
+namespace League\Url\Interfaces;
 
 /**
  * A common interface for URL components
@@ -49,4 +49,13 @@ interface Component
      * @return string
      */
     public function getUriComponent();
+
+    /**
+     * return true if two Component object represents the same value
+     *
+     * @param Component $component
+     *
+     * @return boolean
+     */
+    public function sameValueAs(Component $component);
 }

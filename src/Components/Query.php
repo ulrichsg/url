@@ -14,6 +14,8 @@ namespace League\Url\Components;
 
 use ArrayAccess;
 use InvalidArgumentException;
+use League\Url\Interfaces\Component;
+use League\Url\Interfaces\Query as QueryInterface;
 use RuntimeException;
 use Traversable;
 
@@ -23,7 +25,7 @@ use Traversable;
  *  @package League.url
  *  @since  1.0.0
  */
-class Query extends AbstractContainer implements Component, ArrayAccess
+class Query extends AbstractContainer implements QueryInterface, ArrayAccess
 {
     /**
      * The Constructor
@@ -208,13 +210,5 @@ class Query extends AbstractContainer implements Component, ArrayAccess
             throw new RuntimeException('offset can not be null');
         }
         $this->modify(array($offset => $value));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Query $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 }

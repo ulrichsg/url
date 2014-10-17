@@ -38,6 +38,10 @@ class PathTest extends PHPUnit_Framework_TestCase
         $path->append(new ArrayIterator(array('sullivent', 'wacowski', '')));
         $this->assertSame('shop/rev%20iew//sullivent/wacowski/', $path->get());
 
+        $this->assertNull($path->getSegment(32));
+        $this->assertSame('default', $path->getSegment(32, 'default'));
+        $this->assertSame('shop', $path->getSegment(0));
+
         $path->prepend('master');
         $path->prepend('master');
         $this->assertSame('master/master/shop/rev%20iew//sullivent/wacowski/', (string) $path);
@@ -48,6 +52,22 @@ class PathTest extends PHPUnit_Framework_TestCase
         $path->remove('');
 
         $this->assertSame('master/master/shop/rev%20iew/sullivent/slave/slave/wacowski/', (string) $path);
+    }
+
+    public function testSetSegment()
+    {
+        $path = new Path('/test/query.php');
+        $path->setSegment(0, 'shop');
+        $this->assertSame('shop/query.php', $path->__toString());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetSegmentFailed()
+    {
+        $path = new Path('/test/query.php');
+        $path->setSegment(23, 'shop');
     }
 
     public function testRemove()

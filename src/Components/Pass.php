@@ -12,6 +12,8 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Component;
+
 /**
  *  A class to manipulate URL Pass component
  *
@@ -20,14 +22,6 @@ namespace League\Url\Components;
  */
 class Pass extends AbstractComponent implements Component
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Pass $component)
-    {
-        return $this->__toString() === $component->__toString();
-    }
-
     /**
      * {@inheritdoc}
      */

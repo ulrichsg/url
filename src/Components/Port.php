@@ -12,6 +12,7 @@
 */
 namespace League\Url\Components;
 
+use League\Url\Interfaces\Component;
 use RuntimeException;
 
 /**
@@ -45,14 +46,6 @@ class Port extends AbstractComponent implements Component
         }
 
         $this->data = (int) $data;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sameValueAs(Port $component)
-    {
-        return $this->__toString() === $component->__toString();
     }
 
     /**

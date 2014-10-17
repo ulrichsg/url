@@ -65,7 +65,7 @@ interface Url
     /**
      * Compare two Url object and tells whether they can be considered equal
      *
-     * @param League\Url\UrlInterface $url
+     * @param League\Url\Interfaces\Url $url
      *
      * @return boolean
      */
@@ -83,7 +83,7 @@ interface Url
     /**
      * get the URL scheme component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Component
      */
     public function getScheme();
 
@@ -99,7 +99,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Component
      */
     public function getUser();
 
@@ -115,7 +115,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Component
      */
     public function getPass();
 
@@ -131,7 +131,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Host
      */
     public function getHost();
 
@@ -147,7 +147,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Component
      */
     public function getPort();
 
@@ -163,7 +163,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\PathInterface
+     * @return League\Url\Interfaces\Path
      */
     public function getPath();
 
@@ -179,7 +179,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\QueryInterface
+     * @return League\Url\Interfaces\Query
      */
     public function getQuery();
 
@@ -195,7 +195,7 @@ interface Url
     /**
      * get the URL pass component
      *
-     * @return League\Url\Components\Component
+     * @return League\Url\Interfaces\Component
      */
     public function getFragment();
 }

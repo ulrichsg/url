@@ -120,7 +120,7 @@ abstract class AbstractUrl
             return $this->__toString();
         }
 
-        return $this->path->getPath($ref_url->getPath())
+        return $this->path->relativeTo($ref_url->getPath())->__toString()
             .$this->query->getUriComponent()
             .$this->fragment->getUriComponent();
     }

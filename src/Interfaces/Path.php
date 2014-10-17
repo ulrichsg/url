@@ -18,68 +18,14 @@ namespace League\Url\Interfaces;
  *  @package League.url
  *  @since  1.0.0
  */
-interface Path extends Component
+interface Path extends SegmentComponent
 {
     /**
-     * return a array representation of the data
+     * Return a new Path relative to the given Path
      *
-     * @return array
+     * @param Path $path
+     *
+     * @return Path
      */
-    public function toArray();
-
-    /**
-     * return the array keys
-     *
-     * @return array
-     */
-    public function keys();
-
-    /**
-     * Append data to the component
-     *
-     * @param mixed   $data         the data can be a array, a Traversable or a string
-     * @param string  $whence       where the data should be prepended to
-     * @param integer $whence_index the recurrence index of $whence
-     *
-     * @return void
-     */
-    public function append($data, $whence = null, $whence_index = null);
-
-    /**
-     * Prepend data to the component
-     *
-     * @param mixed   $data         the data can be a array, a Traversable or a string
-     * @param string  $whence       where the data should be prepended to
-     * @param integer $whence_index the recurrence index of $whence
-     *
-     * @return void
-     */
-    public function prepend($data, $whence = null, $whence_index = null);
-
-    /**
-     * Remove part of the component
-     *
-     * @param mixed $data the data can be a array, a Traversable or a string
-     *
-     * @return void
-     */
-    public function remove($data);
-
-    /**
-     * Return a Segment Parameter
-     *
-     * @param integer $key     the query parameter key
-     * @param mixed   $default the query parameter default value
-     *
-     * @return mixed
-     */
-    public function getSegment($key, $default = null);
-
-    /**
-     * Segment Parameter Setter
-     *
-     * @param integer $key   the query parameter key
-     * @param mixed   $value the query parameter value
-     */
-    public function setSegment($key, $value);
+    public function relativeTo(Path $path = null);
 }

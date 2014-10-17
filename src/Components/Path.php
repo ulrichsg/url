@@ -54,12 +54,12 @@ class Path extends AbstractSegment implements PathInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath(Path $reference = null)
+    public function relativeTo(PathInterface $reference = null)
     {
         if (is_null($reference)) {
-            return $this->__toString();
+            return clone $this;
         } elseif ($this->sameValueAs($reference)) {
-            return '';
+            return new static;
         }
 
         $ref_path  = array_values($reference->toArray());
@@ -78,13 +78,11 @@ class Path extends AbstractSegment implements PathInterface
         $nb_common_segment = count($ref_path) - $index;
 
         //let's output the relative path using a new Path object
-        $res = new Path(array_merge(
+        return new static(array_merge(
             array_fill(0, $nb_common_segment, '..'),
             array_slice($this_path, $index),
             array($filename)
         ));
-
-        return $res->__toString();
     }
 
     /**

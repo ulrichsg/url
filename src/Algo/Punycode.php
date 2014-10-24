@@ -1,6 +1,6 @@
 <?php
 
-namespace League\Url\Components\Punycode;
+namespace League\Url\Algo;
 
 /**
  * Punycode implementation as described in RFC 3492

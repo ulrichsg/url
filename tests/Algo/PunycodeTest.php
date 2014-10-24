@@ -2,7 +2,7 @@
 
 namespace League\Url\Test;
 
-use League\Url\Components\Punycode\Punycode;
+use League\Url\Algo\Punycode;
 use PHPUnit_Framework_TestCase;
 
 /**

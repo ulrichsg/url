@@ -57,9 +57,12 @@ abstract class AbstractSegment extends AbstractContainer
     public function remove($data)
     {
         $data = $this->fetchRemainingSegment($this->data, $data);
-        if (! is_null($data)) {
-            $this->set($data);
+        if (is_null($data)) {
+            return false;
         }
+        $this->set($data);
+
+        return true;
     }
 
     /**
@@ -292,7 +295,10 @@ abstract class AbstractSegment extends AbstractContainer
         return $this->data[$key];
     }
 
-    public function setSegment($key, $value)
+    /**
+     * {@inheritdoc}
+     */
+    public function replaceSegment($key, $value)
     {
         $key = filter_var($key, FILTER_VALIDATE_INT, array(
             'options' => array(
@@ -301,7 +307,7 @@ abstract class AbstractSegment extends AbstractContainer
             )
         ));
         if (false === $key) {
-            throw new InvalidArgumentException('key must be a positif interger or 0');
+            throw new InvalidArgumentException('key must be a positif integer or 0');
         }
 
         $this->data[$key] = (string) $value;

@@ -57,7 +57,7 @@ class PathTest extends PHPUnit_Framework_TestCase
     public function testSetSegment()
     {
         $path = new Path('/test/query.php');
-        $path->setSegment(0, 'shop');
+        $path->replaceSegment(0, 'shop');
         $this->assertSame('shop/query.php', $path->__toString());
     }
 
@@ -67,7 +67,7 @@ class PathTest extends PHPUnit_Framework_TestCase
     public function testSetSegmentFailed()
     {
         $path = new Path('/test/query.php');
-        $path->setSegment(23, 'shop');
+        $path->replaceSegment(23, 'shop');
     }
 
     public function testRemove()

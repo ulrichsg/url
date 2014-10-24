@@ -12,7 +12,7 @@
 */
 namespace League\Url\Components;
 
-use League\Url\Components\Punycode\Punycode;
+use League\Url\Algo\Punycode;
 use League\Url\Interfaces\Host as HostInterface;
 use LogicException;
 use RuntimeException;

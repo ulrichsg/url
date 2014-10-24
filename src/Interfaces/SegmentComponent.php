@@ -68,18 +68,10 @@ interface SegmentComponent extends Component
     /**
      * Return a Segment Parameter
      *
-     * @param integer $key     the query parameter key
-     * @param mixed   $default the query parameter default value
+     * @param integer $key     the segment index
+     * @param mixed   $default the segment default value
      *
      * @return mixed
      */
     public function getSegment($key, $default = null);
-
-    /**
-     * Segment Parameter Setter
-     *
-     * @param integer $key   the query parameter key
-     * @param mixed   $value the query parameter value
-     */
-    public function setSegment($key, $value);
 }

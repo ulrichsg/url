@@ -106,14 +106,17 @@ class Query extends AbstractContainer implements QueryInterface, ArrayAccess
     }
 
     /**
-     * Query Parameter Setter alias of offsetSet
+     * Query Parameter Setter
      *
      * @param string $key   the query parameter key
      * @param mixed  $value the query parameter value
      */
     public function setParameter($key, $value)
     {
-        return $this->offsetSet($key, $value);
+        if (is_null($key)) {
+            throw new RuntimeException('offset can not be null');
+        }
+        $this->modify(array($key => $value));
     }
 
     /**
@@ -174,7 +177,7 @@ class Query extends AbstractContainer implements QueryInterface, ArrayAccess
     }
 
     /**
-     * ArrayAccess Interface method
+     * {@inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -182,7 +185,7 @@ class Query extends AbstractContainer implements QueryInterface, ArrayAccess
     }
 
     /**
-     * ArrayAccess Interface method
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -190,7 +193,7 @@ class Query extends AbstractContainer implements QueryInterface, ArrayAccess
     }
 
     /**
-     * ArrayAccess Interface method
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -206,9 +209,6 @@ class Query extends AbstractContainer implements QueryInterface, ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
-            throw new RuntimeException('offset can not be null');
-        }
-        $this->modify(array($offset => $value));
+        return $this->setParameter($offset, $value);
     }
 }

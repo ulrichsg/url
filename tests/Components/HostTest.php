@@ -54,13 +54,10 @@ class HostTest extends PHPUnit_Framework_TestCase
         $host->prepend('foo');
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testRemoveWithIpFailed()
     {
         $host = new Host('127.0.0.1');
-        $host->remove('foo');
+        $this->assertFalse($host->remove('foo'));
     }
 
     public function testPrepend()

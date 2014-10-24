@@ -61,7 +61,7 @@ interface SegmentComponent extends Component
      *
      * @param mixed $data the data can be a array, a Traversable or a string
      *
-     * @return void
+     * @return boolean returns true if the data has been removed
      */
     public function remove($data);
 
@@ -71,7 +71,7 @@ interface SegmentComponent extends Component
      * @param integer $key     the segment index
      * @param mixed   $default the segment default value
      *
-     * @return mixed
+     * @return string
      */
     public function getSegment($key, $default = null);
 }

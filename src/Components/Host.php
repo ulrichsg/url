@@ -228,16 +228,6 @@ class Host extends AbstractSegment implements HostInterface
     /**
      * {@inheritdoc}
      */
-    public function remove($data)
-    {
-        $this->assertHostAsIp();
-
-        return parent::remove($data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getUriComponent()
     {
         $str = $this->__toString();

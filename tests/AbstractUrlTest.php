@@ -192,4 +192,11 @@ class AbstractUrlTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($url1->sameValueAs($url2));
         $this->assertFalse($url3->sameValueAs($url2));
     }
+
+    public function testToArray()
+    {
+         $url1 = Url::createFromUrl('https://toto.com:443/toto.php');
+         $url2 = UrlImmutable::createFromUrl('https://toto.com:443/toto.php');
+         $this->assertSame($url1->toArray(), $url2->toArray());
+    }
 }

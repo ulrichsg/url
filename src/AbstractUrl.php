@@ -223,6 +223,25 @@ abstract class AbstractUrl
     }
 
     /**
+     * Array representation of an URL
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'scheme' => $this->scheme->get(),
+            'user' => $this->user->get(),
+            'pass' => $this->pass->get(),
+            'host' => $this->host->get(),
+            'port' => $this->port->get(),
+            'path' => $this->path->get(),
+            'query' => $this->query->get(),
+            'fragment' => $this->fragment->get(),
+        );
+    }
+
+    /**
      * Return a instance of Url from a server array
      *
      * @param array $server the server array

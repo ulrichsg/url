@@ -28,6 +28,15 @@ interface Url
     public function __toString();
 
     /**
+     * return an associative array representation for the current URL
+     * similar to the result of parse_url but all components are always
+     * present
+     *
+     * @return array
+     */
+    public function toArray();
+
+    /**
      * return the string representation for the current URL
      * user info
      *
